@@ -36,8 +36,30 @@ class Role(db.Model):
     name = db.Column(db.String(255))
     users = db.relationship('User',backref = 'role',lazy="dynamic")
 
+class Blog:
+
+    all_blogs = []
+
+def __init__(self,id,blog):
+        self.id = id
+        self.blog = blog
 
 
+def save_blog(self):
+        Blog.all_blogs.append(self)
 
-    def __repr__(self):
-        return f'User {self.username}'
+
+@classmethod
+def clear_blogs(cls):
+        Blog.all_blogs.clear()
+
+@classmethod
+def get_blogs(cls,id):
+    response = []
+    for blog in cls.all_blogs:
+        if blog.id == id:
+            response.append(blog)
+
+
+def __repr__(self):
+    return f'User {self.username}'
