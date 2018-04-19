@@ -1,5 +1,7 @@
+import os
 class Config:
-    pass
+    
+    SECRET_KEY = '<Flask WTF Secret Key>'
 
 class ProdConfig(Config):
     pass
@@ -7,5 +9,7 @@ class ProdConfig(Config):
 class DevConfig(Config):
     DEBUG = True
 
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://david:somanypasswords@localhost/blog'
+    
 config_options ={"production":ProdConfig,"default":DevConfig}
 
