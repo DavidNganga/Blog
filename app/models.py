@@ -18,21 +18,22 @@ class User(UserMixin,db.Model):
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     pass_secure = db.Column(db.String(255))
     # password_hash = db.Column(db.String(255))
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
-
-    
-
-@property
-def password(self):
-            raise AttributeError('You cannot read the password attribute')
-
-@password.setter
-def password(self, password):
-            self.pass_secure = generate_password_hash(password)
 
 
-def verify_password(self,password):
-            return check_password_hash(self.pass_secure,password)
+    def __repr__(self):
+        return f'User {self.username}'
+
+    @property
+    def password(self):
+        raise AttributeError('You cannot read the password attribute')
+
+    @password.setter
+    def password(self, password):
+        self.pass_secure = generate_password_hash(password)
+
+
+    def verify_password(self,password):
+        return check_password_hash(self.pass_secure,password)
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -41,29 +42,29 @@ class Role(db.Model):
     name = db.Column(db.String(255))
     users = db.relationship('User',backref = 'role',lazy="dynamic")
 
-class Blog:
+# class Blog(db.Model):
+#     __tablename__ = 'blogs'
 
-    all_blogs = []
+#     id = db.Column(db.Integer,primary_key=True)
+#     p_body = db.Column(db.String)
+#     users_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
-def __init__(self,id,blog):
-        self.id = id
-        self.blog = blog
-
-
-def save_blog(self):
-        Blog.all_blogs.append(self)
+#     all_blogs = []
 
 
-@classmethod
-def clear_blogs(cls):
-        Blog.all_blogs.clear()
+#     def save_blog(self):
+#             db.session.add(self)
+#             db.session.commit()
 
-@classmethod
-def get_blogs(cls,id):
-    response = []
-    for blog in cls.all_blogs:
-        if blog.id == id:
-            response.append(blog)
+
+# @classmethod
+# def clear_blogs(cls):
+#         Blog.all_blogs.clear()
+
+# @classmethod
+# def get_blogs(cls):
+#     blogs = Blog.query.all()
+#     return blogs
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -71,9 +72,8 @@ class Post(db.Model):
  
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+   
 
 
-def __repr__(self):
-    return f'User {self.username}'
 
 
