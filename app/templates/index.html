@@ -3,8 +3,44 @@
 
 
 {% block content %}
+<div class="container">
+<div class="row">
+        <div class="jumbotron">
+
+<h1>Want to read something..</h1>
+</div>
+</div>
+</div>
+<br>
+
+<br>
+<br>
 
 
+
+{%for blog in Blogs%}
+
+
+
+
+<div class="container">  
+    <div class="row">  
+            
+
+<h1> <a href="{{url_for('main.post',id=blog.id)}}"> {{blog.title}}</a>  </h1>
+
+{{blog.body}}
+
+</div>
+
+</div>
+
+
+
+
+
+
+{%endfor%}
 
 
 {% endblock%}
