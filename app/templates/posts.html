@@ -21,10 +21,17 @@
 {%endfor%}
 <br>
 <br>
-{% for comment in comments%}
+<div class="container">
+        <div class="col-md-6">
+                <h3>Comments</h3>
+            </div>
+        </div>
+
+{% for comment in allcomments%}
 <div class="container">
     <div class="col-md-6">
-{{comment.body}}
+            
+  <li> {{comment.body}}  </li> 
 </div>
 </div>
 {%endfor%}

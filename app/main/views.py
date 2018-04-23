@@ -47,15 +47,15 @@ def post(id):
         new_comment = Comment(body = comment_form.review.data)
         db.session.add(new_comment)
         db.session.commit()
+       
         return redirect(url_for('main.post',id=id))
-        allcomments = Comment.query.all()
-        comments = Comment.query.filter_by(comment_id=id).all()
+    allcomments = Comment.query.all()
+    print(allcomments)
+       
      
 
-    return render_template('posts.html',posts=posts,comment_form=comment_form,comments=comments)
-     # return render_template('comment.html',comment_form=comment_form)
-
-
+    return render_template('posts.html',posts=posts,comment_form=comment_form,comments=comments,allcomments=allcomments)
+    
 
 
 
