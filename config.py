@@ -1,7 +1,7 @@
 import os
 class Config:
     
-    SECRET_KEY = '<Flask WTF Secret Key>'
+    SECRET_KEY = '<potatas>'
 
 class ProdConfig(Config):
     pass
