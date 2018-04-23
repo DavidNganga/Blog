@@ -14,5 +14,5 @@ class BlogForm(FlaskForm):
 class CommentForm(FlaskForm):
 
     
-    review = TextAreaField('nobody gives a fuck about your opinion tbh but anyway..', validators=[Required()])
+    review = TextAreaField('leave a comment..', validators=[Required()])
     submit = SubmitField('Submit')
