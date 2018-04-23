@@ -7,8 +7,6 @@ from .. import db
 from flask_login import current_user
 
 
-
-
 @main.route('/',methods = ['GET','POST'])
 def index():
     Blogs = Post.query.all()

@@ -5,11 +5,13 @@ class Config:
 
     
 class ProdConfig(Config):
-    pass
+   SQLALCHEMY_DATABASE_URIN= os.environ.get('DATABASE_URL')
+
+   DEBUG = True
 
 class DevConfig(Config):
-    DEBUG = True  
+    
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://david:somanypasswords@localhost/blog'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    DEBUG = True
 config_options ={"production":ProdConfig,"default":DevConfig}
 
