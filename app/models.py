@@ -1,7 +1,9 @@
-from . import db
+from . import db, admin
 from werkzeug.security import generate_password_hash,check_password_hash
-from flask_login import UserMixin
+from flask_login import UserMixin, LoginManager, current_user
 from . import login_manager
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -15,7 +17,8 @@ class User(UserMixin,db.Model):
     password = db.Column(db.String(60))
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     pass_secure = db.Column(db.String(255))
-    # password_hash = db.Column(db.String(255))
+
+
 
     
 
@@ -34,6 +37,10 @@ class User(UserMixin,db.Model):
 
     def verify_password(self,password):
         return check_password_hash(self.pass_secure,password)
+
+class ModelView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated 
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -68,7 +75,7 @@ class Role(db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    body = db.Column(db.String(140))
+    body = db.Column(db.String(500))
     title = db.Column(db.String(250))
  
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -82,8 +89,7 @@ class Comment(db.Model):
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
-   
 
-
-
-
+admin.add_view(ModelView(User,db.session))
+admin.add_view(ModelView(Comment,db.session))
+admin.add_view(ModelView(Post,db.session))

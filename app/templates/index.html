@@ -1,13 +1,21 @@
 {% extends 'base.html'%}
 {% import 'bootstrap/wtf.html' as wtf%}
+<!-- Styles block -->
 
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+<!-- Content block -->
 
 {% block content %}
 <div class="container">
 <div class="row">
         <div class="jumbotron">
 
-<h1>Want to read something..</h1>
+<h1>Rabbit hole
+                 ...
+</h1>
 </div>
 </div>
 </div>
@@ -15,27 +23,22 @@
 
 <br>
 <br>
-
-
-
 {%for blog in Blogs%}
-
-
-
-
 <div class="container">  
-    <div class="row">  
+    <div class="container-fluid">
+    <div class="row"> 
+       
             
 
 <h1> <a href="{{url_for('main.post',id=blog.id)}}"> {{blog.title}}</a>  </h1>
 
-{{blog.body}}
-
+{{blog.body|truncate(25)}}
+<p>     <button><a href="{{url_for('main.post',id=blog.id)}}">Read full article..</a> </button>         </p>
+</div>
+</div>
 </div>
 
-</div>
-
-
+ 
 
 
 
